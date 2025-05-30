@@ -1,0 +1,4 @@
+### GET Request Example
+
+GET http://localhost:8080/products/123
+Accept: application/json
