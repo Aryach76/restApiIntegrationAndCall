@@ -1,10 +1,21 @@
 package dev.arya.productservice.controllers;
 
+import dev.arya.productservice.services.ProductService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/products/")
 public class ProductController {
+
+
+    @Autowired
+    private ProductService productService;
+
+    public ProductController(@Qualifier("FakestoreProductService") ProductService productService){
+        this.productService=productService;
+    }
 
     @GetMapping
     public void getAllProduct(){
@@ -14,7 +25,7 @@ public class ProductController {
     //localhost:8080/products/123
     @GetMapping("{id}")
     public String getProductById(@PathVariable("id") Long id){
-        return "Here is product id : " + id;
+        return productService.getProductById(id);
     }
 
     @DeleteMapping("/{id}")
