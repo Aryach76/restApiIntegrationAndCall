@@ -1,4 +1,4 @@
-package dev.arya.productservice.dtos;
+package dev.arya.productservice.thirdpartyclients.productservice.fakestore;
 
 
 import lombok.Getter;
