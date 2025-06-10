@@ -2,7 +2,10 @@ package dev.arya.productservice.thirdpartyclients.productservice.fakestore;
 
 import dev.arya.productservice.dtos.GenericProductDto;
 import dev.arya.productservice.exceptions.NotFoundException;
+import jakarta.annotation.PostConstruct;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.web.client.RestTemplateBuilder;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -16,15 +19,29 @@ import java.util.List;
 
 @Service
 
+
 public class FakeStoreProductServiceClient {
 
     private RestTemplateBuilder restTemplateBuilder;
-    private String specificProductRequestUrl ="https://fakestoreapi.com/products/{id}";
-    private String productRequestBaseUrl="https://fakestoreapi.com/products";
 
-    public FakeStoreProductServiceClient(RestTemplateBuilder restTemplateBuilder){
+
+
+    private String fakeStoreApiUrl;
+
+
+    @Value("${fakestore.api.paths.product}")
+    private String fakeStoreProductApiPath;
+
+    private String specificProductRequestUrl;
+    private String productRequestBaseUrl;
+
+
+    public FakeStoreProductServiceClient(RestTemplateBuilder restTemplateBuilder,@Value("${fakestore.api.url}") String fakeStoreApiUrl,@Value("${fakestore.api.paths.product}") String fakeStoreProductApiPath){
         this.restTemplateBuilder=restTemplateBuilder;
+        this.productRequestBaseUrl= fakeStoreApiUrl + fakeStoreProductApiPath;
+        this.specificProductRequestUrl=fakeStoreApiUrl + fakeStoreProductApiPath+"/{id}";
     }
+
 
 
 

@@ -4,12 +4,13 @@ import dev.arya.productservice.dtos.GenericProductDto;
 import dev.arya.productservice.exceptions.NotFoundException;
 import dev.arya.productservice.thirdpartyclients.productservice.fakestore.FakeStoreProductDto;
 import dev.arya.productservice.thirdpartyclients.productservice.fakestore.FakeStoreProductServiceClient;
+import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 
-
+@Primary
 @Service("FakestoreProductService")
 public class FakestoreProductService implements ProductService {
 
