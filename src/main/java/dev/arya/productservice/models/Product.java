@@ -1,9 +1,7 @@
 package dev.arya.productservice.models;
 
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.*;
 import lombok.*;
 
 @Entity
@@ -23,5 +21,6 @@ public class Product extends BaseModel{
     @JoinColumn(name = "category_id")
     private Category category;
 
-    private double price;
+    @OneToOne
+    private Price price=new Price();
 }
