@@ -1,15 +1,13 @@
 package dev.arya.productservice.controllers;
 
 
+import dev.arya.productservice.dtos.GetProductTitlesRequestDto;
 import dev.arya.productservice.dtos.ProductDto;
 import dev.arya.productservice.models.Category;
 import dev.arya.productservice.models.Product;
 import dev.arya.productservice.services.CategoryService;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,5 +35,12 @@ public class CategoryController {
         }
         return productDtos;
     }
+
+        @PostMapping("/titles")
+        public List<String> getProductTitles(@RequestBody GetProductTitlesRequestDto requestDto){
+
+        List<String> uuids=requestDto.getUuids();
+        return categoryService.getProductTitles(uuids);
+        }
 
 }
